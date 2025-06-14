@@ -238,5 +238,24 @@
       link.click();
     }
   </script>
+
+  <!-- Visit Counter -->
+  <div style="text-align: center; margin-top: 30px;">
+    <p id="visitCounter">Visits: Loading...</p>
+  </div>
+
+  <script>
+    // 🔢 Visit Counter using CountAPI
+    fetch('https://api.countapi.xyz/hit/zoidscardgen/visits')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('visitCounter').textContent = `Visits: ${data.value}`;
+      })
+      .catch(err => {
+        document.getElementById('visitCounter').textContent = 'Visit count unavailable';
+        console.error('Visit counter error:', err);
+      });
+  </script>
+
 </body>
 </html>
