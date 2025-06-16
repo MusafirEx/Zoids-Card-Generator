@@ -110,17 +110,17 @@
       <option value="Organoid">Organoid</option>
     </select>
 
-    <label for="level">Level</label>
+    <label for="level">Level [MAX 10]</label>
     <input type="number" id="level" placeholder="1" />
 
-    <label for="description">Card Description</label>
-    <textarea id="description" rows="4" placeholder="The Blade Liger (ブレードライガー, Burēdo Raigā) is a Lion-type Zoid."></textarea>
+    <label for="description">Card Effect</label>
+    <textarea id="description" rows="4" placeholder="eg: if Total Level of 3 card is equal 20, attack +50 "></textarea>
 
-    <label for="atk">ATK</label>
-    <input type="number" id="atk" placeholder="3000" />
+    <label for="atk">Attack [MAX 1000 for large Zoids eg:Gojulas Giga/Deathsaurer/Deathstinger] </label>
+    <input type="number" id="atk" placeholder="700" max="1000"/>
 
-    <label for="def">DEF</label>
-    <input type="number" id="def" placeholder="2500" />
+    <label for="def">Health Point [MIN 1000 (small zoids), MAX 3000 (Large Zoid)]</label>
+    <input type="number" id="def" placeholder="2000" max="3000"/>
 
     <label for="imageUpload">Zoids Image(Transparent background)</label>
     <input type="file" id="imageUpload" accept="image/*" />
@@ -226,9 +226,9 @@
       ctx.fillStyle = "#000";
       ctx.strokeStyle = "#fff";
       ctx.strokeText('ATK', 120, 30);
-      ctx.fillText('atk', 120, 30);
-      ctx.strokeText('def', 245, 30);
-      ctx.fillText('def', 245, 30);
+      ctx.fillText('ATK', 120, 30);
+      ctx.strokeText('HP', 247, 30);
+      ctx.fillText('HP', 247, 30);
 
       ctx.font = "italic 16px Bigmacca";
       ctx.fillStyle = "#FFD700";
