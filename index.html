@@ -10,11 +10,44 @@
       src: url('bigmacca.ttf') format('truetype');
     }
     body {
-      font-family: Arial, sans-serif;
-      padding: 10px;
       margin: 0;
+      padding: 0;
       background: #222;
       color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .left-panel {
+      flex: 0 0 35%;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+    .right-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    canvas {
+      border: 2px solid #fff;
+      background: #ddd;
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+    }
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
     }
     input, select, textarea, button {
       display: block;
@@ -22,19 +55,7 @@
       margin-bottom: 10px;
       padding: 8px;
       box-sizing: border-box;
-    }
-    canvas {
-      border: 2px solid #fff;
-      background: #ddd;
-      display: block;
-      margin: 20px auto;
-      width: 100%;
-      max-width: 350px;
-      height: auto;
-    }
-    label {
-      margin-top: 10px;
-      font-weight: bold;
+      font-size: 16px;
     }
     .controls, .image-controls {
       display: flex;
@@ -48,70 +69,80 @@
       padding: 10px 15px;
       font-size: 16px;
     }
-    .container {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    @media (max-width: 600px) {
-      .controls, .image-controls {
+    @media (max-width: 768px) {
+      body {
         flex-direction: column;
-        align-items: center;
+        height: auto;
+        overflow: auto;
       }
-      .controls button, .image-controls button {
-        width: 100%;
+      .left-panel {
+        flex: 0 0 auto;
+        position: sticky;
+        top: 0;
+        height: auto;
+        z-index: 2;
+      }
+      canvas {
+        max-width: 250px;
+      }
+      .right-panel {
+        flex: 1;
       }
     }
   </style>
 </head>
 <body>
-  <img src="banner.png" alt="Zoids Card Generator" style="width: 100%; max-width: 600px; display: block; margin: 0 auto 20px auto;" />
-  <h1 style="text-align: center;">Zoids Card Generator</h1>
-  
-  <label for="cardName">Card Name</label>
-  <input type="text" id="cardName" placeholder="Zoids Name" />
-
-  <label for="cardType">Type</label>
-  <select id="cardType">
-    <option value="Zoids">Zoids</option>
-    <option value="Pilot">Pilot</option>
-    <option value="Weapons">Weapons</option>
-    <option value="Organoid">Organoid</option>
-  </select>
-
-  <label for="level">Level</label>
-  <input type="number" id="level" placeholder="1" />
-
-  <label for="description">Card Description</label>
-  <textarea id="description" rows="4" placeholder="The Blade Liger (ブレードライガー, Burēdo Raigā) is a Lion-type Zoid."></textarea>
-
-  <label for="atk">ATK</label>
-  <input type="number" id="atk" placeholder="3000" />
-
-  <label for="def">DEF</label>
-  <input type="number" id="def" placeholder="2500" />
-
-  <label for="imageUpload">Zoids Image(Transparent background)</label>
-  <input type="file" id="imageUpload" accept="image/*" />
-
-  <label>Image Controls</label>
-  <div class="image-controls">
-    <button onclick="moveImage(-10, 0)">← Left</button>
-    <button onclick="moveImage(10, 0)">→ Right</button>
-    <button onclick="moveImage(0, -10)">↑ Up</button>
-    <button onclick="moveImage(0, 10)">↓ Down</button>
-    <button onclick="resizeImage(10, 0)">Width +</button>
-    <button onclick="resizeImage(-10, 0)">Width -</button>
-    <button onclick="resizeImage(0, 10)">Height +</button>
-    <button onclick="resizeImage(0, -10)">Height -</button>
-  </div>
-
-  <div class="container">
+  <div class="left-panel">
     <canvas id="cardCanvas" width="350" height="500"></canvas>
   </div>
 
-  <button onclick="downloadCard()">Download Card</button>
+  <div class="right-panel">
+    <h1 style="text-align: center; font-family: 'Bigmacca'; font-size: 36px;">Zoids Card Generator</h1>
+
+    <label for="cardName">Card Name</label>
+    <input type="text" id="cardName" placeholder="Zoids Name" />
+
+    <label for="cardType">Type</label>
+    <select id="cardType">
+      <option value="Zoids">Zoids</option>
+      <option value="Pilot">Pilot</option>
+      <option value="Weapons">Weapons</option>
+      <option value="Organoid">Organoid</option>
+    </select>
+
+    <label for="level">Level</label>
+    <input type="number" id="level" placeholder="1" />
+
+    <label for="description">Card Description</label>
+    <textarea id="description" rows="4" placeholder="The Blade Liger (ブレードライガー, Burēdo Raigā) is a Lion-type Zoid."></textarea>
+
+    <label for="atk">ATK</label>
+    <input type="number" id="atk" placeholder="3000" />
+
+    <label for="def">DEF</label>
+    <input type="number" id="def" placeholder="2500" />
+
+    <label for="imageUpload">Zoids Image(Transparent background)</label>
+    <input type="file" id="imageUpload" accept="image/*" />
+
+    <label>Image Controls</label>
+    <div class="image-controls">
+      <button onclick="moveImage(-10, 0)">← Left</button>
+      <button onclick="moveImage(10, 0)">→ Right</button>
+      <button onclick="moveImage(0, -10)">↑ Up</button>
+      <button onclick="moveImage(0, 10)">↓ Down</button>
+      <button onclick="resizeImage(10, 0)">Width +</button>
+      <button onclick="resizeImage(-10, 0)">Width -</button>
+      <button onclick="resizeImage(0, 10)">Height +</button>
+      <button onclick="resizeImage(0, -10)">Height -</button>
+    </div>
+
+    <button onclick="downloadCard()">Download Card</button>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <p id="visitCounter">Visits: Loading...</p>
+    </div>
+  </div>
 
   <script>
     let imgX = 25, imgY = 100, imgWidth = 300, imgHeight = 200;
@@ -205,7 +236,6 @@
       ctx.fillText(atk, 205, 30);
       ctx.fillText(def, 330, 30);
     
-
       ctx.font = "italic bold 10px Arial";
       ctx.fillStyle = "#000";
       ctx.textAlign = "left";
@@ -239,13 +269,7 @@
     }
   </script>
 
-  <!-- Visit Counter -->
-  <div style="text-align: center; margin-top: 30px;">
-    <p id="visitCounter">Visits: Loading...</p>
-  </div>
-
   <script>
-    // 🔢 Visit Counter using CountAPI
     fetch('https://api.countapi.xyz/hit/zoidscardgen/visits')
       .then(response => response.json())
       .then(data => {
@@ -256,6 +280,5 @@
         console.error('Visit counter error:', err);
       });
   </script>
-
 </body>
 </html>
