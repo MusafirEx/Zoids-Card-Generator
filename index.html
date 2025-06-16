@@ -113,14 +113,14 @@
     <label for="level">Level</label>
     <input type="number" id="level" placeholder="1" />
 
-    <label for="description">Card Effect</label>
-    <textarea id="description" rows="4" placeholder="eg: If total level of 3 card is more 20, attack is +50"></textarea>
+    <label for="description">Card Description</label>
+    <textarea id="description" rows="4" placeholder="The Blade Liger (ブレードライガー, Burēdo Raigā) is a Lion-type Zoid."></textarea>
 
-    <label for="atk">Attack [maximum is 1000 for large zoids eg: Death Saurer/Gojulas Giga/Death Stinger]</label>
-    <input type="number" id="atk" placeholder="300" max="1000"/>
+    <label for="atk">ATK</label>
+    <input type="number" id="atk" placeholder="3000" />
 
-    <label for="hp">Health Point[Minimum is 1000 (small zoid ), maximum 3000 (Large Zoids)]</label>
-    <input type="number" id="hp" placeholder="2000" min="1000" max="3000" />
+    <label for="def">DEF</label>
+    <input type="number" id="def" placeholder="2500" />
 
     <label for="imageUpload">Zoids Image(Transparent background)</label>
     <input type="file" id="imageUpload" accept="image/*" />
@@ -187,7 +187,7 @@
       const level = document.getElementById("level").value;
       const desc = document.getElementById("description").value;
       const atk = document.getElementById("atk").value;
-      const hp = document.getElementById("hp").value;
+      const def = document.getElementById("def").value;
 
       let frameSrc = '';
       if (type === "Zoids") frameSrc = "frame-zoids.png";
@@ -226,22 +226,20 @@
       ctx.fillStyle = "#000";
       ctx.strokeStyle = "#fff";
       ctx.strokeText('ATK', 120, 30);
-      ctx.fillText('ATK', 120, 30);
-      ctx.strokeText('HP', 247, 30);
-      ctx.fillText('HP', 247, 30);
+      ctx.fillText('atk', 120, 30);
+      ctx.strokeText('def', 245, 30);
+      ctx.fillText('def', 245, 30);
 
       ctx.font = "italic 16px Bigmacca";
       ctx.fillStyle = "#FFD700";
       ctx.textAlign = "right";
       ctx.fillText(atk, 205, 30);
-      ctx.fillText(hp, 330, 30);
+      ctx.fillText(def, 330, 30);
     
       ctx.font = "italic bold 10px Arial";
       ctx.fillStyle = "#000";
       ctx.textAlign = "left";
       wrapText(ctx, desc, 30, 470, 300, 10);
-
-  
     }
 
     function wrapText(context, text, x, y, maxWidth, lineHeight) {
