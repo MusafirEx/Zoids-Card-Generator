@@ -1,1 +1,1 @@
-# Zoids-Card-Generator
+# Zoids Card Generator
