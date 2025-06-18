@@ -242,6 +242,26 @@
       ctx.fillStyle = "#000";
       ctx.textAlign = "left";
       wrapText(ctx, desc, 30, 470, 300, 10);
+
+      document.querySelectorAll('input').forEach(el => {
+        el.addEventListener('input', enforceLimits);
+      });
+    }
+
+    document.querySelectorAll('input').forEach(el => {
+      el.addEventListener('input', enforceLimits);
+    });
+
+
+    function enforceLimits() {
+      const atkInput = document.getElementById("atk");
+      if (parseInt(atkInput.value) > 1000) atkInput.value = 1000;
+
+      const defInput = document.getElementById("def");
+      if (parseInt(defInput.value) > 3000) defInput.value = 3000;
+
+      const levelInput = document.getElementById("level");
+      if (parseInt(levelInput.value) > 10) levelInput.value = 10;
     }
 
     function wrapText(context, text, x, y, maxWidth, lineHeight) {
