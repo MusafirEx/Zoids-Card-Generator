@@ -49,7 +49,7 @@
       margin-top: 10px;
       display: block;
     }
-    text{
+    small{
       font-weight: normal;
       font-size: 12px;
       margin-top: 5px;
@@ -111,10 +111,10 @@
 <div style="display: flex; gap: 10px;">
    <div style="flex: 1;">
     <label for="cardType">Type</label>
-     <text>Zoids Card</text>
-      <text>Pilot Card</text>
-      <text>Weapons Card</text> 
-      <text>Organoid</text>
+     <small>Zoids Card</small>
+      <small>Pilot Card</small>
+      <small>Weapons Card</small> 
+      <small>Organoid</small>
       <select id="cardType">
       <option value="Zoids">Zoids</option>
       <option value="Pilot">Pilot</option>
@@ -124,27 +124,27 @@
  </div>
   <div style="flex: 1;">
     <label for="level">Level [MAX 10]</label>
-    <text>Small zoids   :1-3  eg:Bio Raptor/Molga/Evo Flyer</text>
-    <text>Medium Zoids  :4-7  eg:Koning Wolf/Liger Zero/Geno Breaker</text>
-    <text>Large Zoids   :8-10 eg:Gojulas Giga/Deathsaurer/Deathstinger</text> 
-    <text>*Zoids size can be refer on youtube or Zoids Wiki</text>
+    <small>Small zoids   :1-3  eg:Bio Raptor/Molga/Evo Flyer</small>
+    <small>Medium Zoids  :4-7  eg:Koning Wolf/Liger Zero/Geno Breaker</small>
+    <small>Large Zoids   :8-10 eg:Gojulas Giga/Deathsaurer/Deathstinger</small> 
+    <small>*Zoids size can be refer on youtube or Zoids Wiki</small>
     <input type="number" id="level" placeholder="1" max="10"/>
   </div>
 </div>
 
 <div style="display: flex; gap: 10px;">
    <div style="flex: 1;">
-    <label for="atk">Attack [MAX 1000 ] </label>
-    <text>Small zoids   :0-400</text>
-    <text>Medium Zoids  :400-800</text>
-    <text>Large Zoids   :800-1000</text> 
+    <label for="atk">Attack  </label>
+    <small>Small zoids   :0-400</small>
+    <small>Medium Zoids  :400-800</small>
+    <small>Large Zoids   :800-1000</small> 
     <input type="number" id="atk" placeholder="700" max="1000" max="1000"/>
   </div>
   <div style="flex: 1;">
-    <label for="def">Health Point [MIN 1000 , MAX 3000]</label>
-    <text>Small zoids   :1000-1500</text>
-    <text>Medium Zoids  :1500-2800</text>
-    <text>Large Zoids   :2800-3000</text> 
+    <label for="def">Health Point</label>
+    <small>Small zoids   :1000-1500</small>
+    <small>Medium Zoids  :1500-2800</small>
+    <small>Large Zoids   :2800-3000</small> 
     <input type="number" id="def" placeholder="2000" max="3000"/>
   </div>
 </div>
@@ -288,8 +288,6 @@
 
       const defInput = document.getElementById("def");
       if (parseInt(defInput.value) > 3000) defInput.value = 3000;
-
-      const defInput = document.getElementById("def");
       if (parseInt(defInput.value) < 1000) defInput.value = 1000;
 
       const levelInput = document.getElementById("level");
