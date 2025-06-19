@@ -125,18 +125,22 @@
     <label for="description">Card Effect</label>
     <textarea id="description" rows="4" placeholder="eg: if Total Level of 3 card is equal 20, attack +50 "></textarea>
 
+<div style="display: flex; gap: 10px;">
+   <div style="flex: 1;">
     <label for="atk">Attack [MAX 1000 ] </label>
     <text>Small zoids   :0-400</text>
     <text>Medium Zoids  :400-800</text>
     <text>Large Zoids   :800-1000</text> 
     <input type="number" id="atk" placeholder="700" max="1000" max="1000"/>
-
+  </div>
+  <div style="flex: 1;">
     <label for="def">Health Point [MIN 1000 (small zoids), MAX 3000 (Large Zoid)]</label>
     <text>Small zoids   :1000-1500</text>
     <text>Medium Zoids  :1500-2800</text>
     <text>Large Zoids   :2800-3000</text> 
     <input type="number" id="def" placeholder="2000" max="3000"/>
-
+  </div>
+</div>
     <label for="imageUpload">Zoids Image(Transparent background)</label>
     <input type="file" id="imageUpload" accept="image/*" />
 
