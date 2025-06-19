@@ -105,8 +105,21 @@
   <div class="right-panel">
     <h1 style="text-align: center; font-family: 'Bigmacca'; font-size: 36px;">Zoids Card Generator</h1>
 
-    <label for="cardName">Card Name</label>
-    <input type="text" id="cardName" placeholder="Zoids Name" />
+     <div style="display: flex; gap: 10px;">
+       <div style="flex: flex-grow;">
+        <label for="cardName">Card Name</label>
+        <input type="text" id="cardName" placeholder="Zoids Name" />
+        </div>
+        <div style="flex: 1;">
+          <label for="zoidSize">Zoids Size</label>
+          <select id="zoidSize" onchange="setRandomLevel()">
+          <option value="">Select Size</option>
+          <option value="small">Small Zoids</option>
+          <option value="medium">Medium Zoids</option>
+          <option value="large">Large Zoids</option>
+          </select>
+        </div>
+    </div>
 
 <div style="display: flex; gap: 10px;">
    <div style="flex: 1;">
@@ -316,6 +329,23 @@
       }
       context.fillText(line, x, y);
     }
+
+    function setRandomLevel() {
+      const size = document.getElementById("zoidSize").value;
+      let min = 1, max = 3;
+
+      if (size === "medium") {
+        min = 4; max = 7;
+      } else if (size === "large") {
+        min = 8; max = 10;
+    }
+
+  if (size) {
+    const level = Math.floor(Math.random() * (max - min + 1)) + min;
+    document.getElementById("level").value = level;
+    generateCard();
+  }
+  }
 
     function downloadCard() {
       const canvas = document.getElementById("cardCanvas");
