@@ -348,8 +348,8 @@
       if (size) 
       {
       const level = Math.floor(Math.random() * (max - min + 1)) + min;
-      const atk = Math.floor(Math.random() * (max - min + 100)) + min;
-      const def = Math.floor(Math.random() * (max - min + 100)) + min;
+      const atk = Math.floor(Math.random() * (aMax - aMin + 100)) + aMin;
+      const def = Math.floor(Math.random() * (hMax - hMin + 100)) + hMin;
       document.getElementById("level").value = level;
       document.getElementById("atk").value = atk;
       document.getElementById("def").value = def;
