@@ -345,16 +345,25 @@
         hMin=2800; hMax=3000;
       }
 
-      if (size) 
-      {
-      const level = Math.floor(Math.random() * (max - min + 1)) + min;
-      const atk = Math.floor(Math.random() * (aMax - aMin + 100)) + aMin;
-      const def = Math.floor(Math.random() * (hMax - hMin + 100)) + hMin;
-      document.getElementById("level").value = level;
-      document.getElementById("atk").value = atk;
-      document.getElementById("def").value = def;
-      generateCard();
-      }
+      if (size) {
+    const level = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    // use step rounding for ATK and DEF
+    const atkStep = 10;  // or 50
+    const defStep = 50;  // or 100
+
+    const rawAtk = Math.floor(Math.random() * (aMax - aMin + 1)) + aMin;
+    const rawDef = Math.floor(Math.random() * (hMax - hMin + 1)) + hMin;
+
+    const atk = Math.round(rawAtk / atkStep) * atkStep;
+    const def = Math.round(rawDef / defStep) * defStep;
+
+    document.getElementById("level").value = level;
+    document.getElementById("atk").value = atk;
+    document.getElementById("def").value = def;
+
+    generateCard();
+  }
       
 
   }
