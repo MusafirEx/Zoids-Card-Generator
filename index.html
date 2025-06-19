@@ -111,36 +111,35 @@
         <input type="text" id="cardName" placeholder="Zoids Name" />
         </div>
         <div style="flex: 1;">
-          <label for="zoidSize">Zoids Size</label>
-          <select id="zoidSize" onchange="setRandomLevel()">
-          <option value="">Select Size</option>
-          <option value="small">Small Zoids</option>
-          <option value="medium">Medium Zoids</option>
-          <option value="large">Large Zoids</option>
+           <label for="cardType">Type</label>
+           <select id="cardType">
+            <option value="Zoids">Zoids</option>
+            <option value="Pilot">Pilot</option>
+            <option value="Weapons">Weapons</option>
+            <option value="Organoid">Organoid</option>
           </select>
         </div>
     </div>
 
 <div style="display: flex; gap: 10px;">
    <div style="flex: 1;">
-    <label for="cardType">Type</label>
-     <small>Zoids Card</small>
-      <small>Pilot Card</small>
-      <small>Weapons Card</small> 
-      <small>Organoid</small>
+    <label for="zoidSize">Zoids Size</label>
       <select id="cardType">
-      <option value="Zoids">Zoids</option>
-      <option value="Pilot">Pilot</option>
-      <option value="Weapons">Weapons</option>
-      <option value="Organoid">Organoid</option>
+      <small>Small zoids   eg:Bio Raptor/Molga/Evo Flyer</small>
+      <small>Medium Zoids  eg:Koning Wolf/Liger Zero/Geno Breaker</small>
+      <small>Large Zoids   eg:Gojulas Giga/Deathsaurer/Deathstinger</small> 
+      <select id="zoidSize" onchange="setRandomLevel()">
+      <option value="">Select Size</option>
+      <option value="small">Small Zoids</option>
+      <option value="medium">Medium Zoids</option>
+      <option value="large">Large Zoids</option>
     </select>
  </div>
   <div style="flex: 1;">
     <label for="level">Level [MAX 10]</label>
-    <small>Small zoids   :1-3  eg:Bio Raptor/Molga/Evo Flyer</small>
-    <small>Medium Zoids  :4-7  eg:Koning Wolf/Liger Zero/Geno Breaker</small>
-    <small>Large Zoids   :8-10 eg:Gojulas Giga/Deathsaurer/Deathstinger</small> 
-    <small>*Zoids size can be refer on youtube or Zoids Wiki</small>
+    <small>Small zoids   :1-3 </small>
+    <small>Medium Zoids  :4-7 </small>
+    <small>Large Zoids   :8-10 </small> 
     <input type="number" id="level" placeholder="1" max="10"/>
   </div>
 </div>
