@@ -220,10 +220,10 @@
       const def = document.getElementById("def").value;
 
       let frameSrc = '';
-      if (type === "Zoids") frameSrc = "frame-zoids.png";
-      if (type === "Pilot") frameSrc = "frame-pilot.png";
-      if (type === "Weapons") frameSrc = "frame-weapons.png";
-      if (type === "Organoid") frameSrc = "frame-organoid.png";
+      if (type === "Zoids") frameSrc = "frames/frame-zoids.png";
+      if (type === "Pilot") frameSrc = "frames/frame-pilot.png";
+      if (type === "Weapons") frameSrc = "frames/frame-weapons.png";
+      if (type === "Organoid") frameSrc = "frames/frame-organoid.png";
 
       const frameImg = new Image();
       frameImg.src = frameSrc;
@@ -243,21 +243,21 @@
       ctx.fillStyle = "#FFD700";
       ctx.strokeStyle = "#fff";
       ctx.textAlign = "left";
-      ctx.linewidth = "1";
+      ctx.linewidth = 1;
       ctx.strokeText(name, 90, 63);
       ctx.fillText(name, 90, 63);
 
       ctx.font = "40px Bigmacca";
       ctx.strokeStyle = "#000";
       ctx.textAlign = "center";
-      ctx.linewidth = "2";
+      ctx.linewidth = 2;
       ctx.strokeText(level, 40, 65);
       ctx.fillText(level, 40, 65);
 
       ctx.font = "italic 16px Bigmacca";
       ctx.fillStyle = "#000";
       ctx.strokeStyle = "#fff";
-      ctx.linewidth = "1";
+      ctx.linewidth = 1;
       ctx.strokeText('ATK', 120, 30);
       ctx.fillText('ATK', 120, 30);
       ctx.strokeText('HP', 247, 30);
