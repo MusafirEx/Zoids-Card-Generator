@@ -291,17 +291,17 @@
       try {
         const frameImg = await loadFrame(type);
 
-        // Ignore an older render that finishes after a newer selection.
         if (currentRender !== renderVersion) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // The uploaded artwork goes underneath the transparent card frame.
+        // Selected card frame is the back layer.
+        ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
+
+        // Uploaded Zoid/card artwork is drawn above the frame.
         if (uploadedImage) {
           ctx.drawImage(uploadedImage, imgX, imgY, imgWidth, imgHeight);
         }
-
-        ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
         ctx.font = "15px Bigmacca";
         ctx.fillStyle = "#000";
