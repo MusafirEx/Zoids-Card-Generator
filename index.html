@@ -49,7 +49,7 @@
       margin-top: 10px;
       display: block;
     }
-    small{
+    small {
       font-weight: normal;
       font-size: 12px;
       margin-top: 5px;
@@ -75,6 +75,20 @@
       padding: 10px 15px;
       font-size: 16px;
     }
+    .attack-editor {
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 10px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+    }
+    .attack-editor h3 {
+      margin: 0 0 10px 0;
+    }
+    .attack-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
     @media (max-width: 768px) {
       body {
         flex-direction: column;
@@ -93,6 +107,9 @@
       }
       .right-panel {
         flex: 1;
+      }
+      .attack-grid {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -160,18 +177,93 @@
       </div>
     </div>
 
-    <div style="display: flex; gap: 10px;">
-      <div style="flex: 1;">
-        <label for="red">Red</label>
-        <input type="number" id="red" placeholder="300" />
+    <div class="attack-editor">
+      <h3>Red Attack</h3>
+      <div class="attack-grid">
+        <div>
+          <label for="red">Value</label>
+          <input type="number" id="red" placeholder="500" />
+        </div>
+        <div>
+          <label for="redAttackName">Attack Name</label>
+          <input type="text" id="redAttackName" placeholder="Killer Fang" />
+        </div>
+        <div>
+          <label for="redCategory">Category</label>
+          <select id="redCategory">
+            <option value="Melee">Melee</option>
+            <option value="Missile">Missile</option>
+            <option value="Beam">Beam</option>
+            <option value="Projectile">Projectile</option>
+            <option value="Electric">Electric</option>
+            <option value="Special">Special</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+        <div>
+          <label for="redModifier">Modifier</label>
+          <input type="number" id="redModifier" placeholder="200" />
+        </div>
       </div>
-      <div style="flex: 1;">
-        <label for="blue">Blue</label>
-        <input type="number" id="blue" placeholder="300" />
+    </div>
+
+    <div class="attack-editor">
+      <h3>Blue Attack</h3>
+      <div class="attack-grid">
+        <div>
+          <label for="blue">Value</label>
+          <input type="number" id="blue" placeholder="250" />
+        </div>
+        <div>
+          <label for="blueAttackName">Attack Name</label>
+          <input type="text" id="blueAttackName" placeholder="Missile Launcher" />
+        </div>
+        <div>
+          <label for="blueCategory">Category</label>
+          <select id="blueCategory">
+            <option value="Missile">Missile</option>
+            <option value="Melee">Melee</option>
+            <option value="Beam">Beam</option>
+            <option value="Projectile">Projectile</option>
+            <option value="Electric">Electric</option>
+            <option value="Special">Special</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+        <div>
+          <label for="blueModifier">Modifier</label>
+          <input type="number" id="blueModifier" placeholder="600" />
+        </div>
       </div>
-      <div style="flex: 1;">
-        <label for="yellow">Yellow</label>
-        <input type="number" id="yellow" placeholder="300" />
+    </div>
+
+    <div class="attack-editor">
+      <h3>Yellow Attack</h3>
+      <div class="attack-grid">
+        <div>
+          <label for="yellow">Value</label>
+          <input type="number" id="yellow" placeholder="250" />
+        </div>
+        <div>
+          <label for="yellowAttackName">Attack Name</label>
+          <input type="text" id="yellowAttackName" placeholder="Charged Particle Cannon" />
+        </div>
+        <div>
+          <label for="yellowCategory">Category</label>
+          <select id="yellowCategory">
+            <option value="Beam">Beam</option>
+            <option value="Melee">Melee</option>
+            <option value="Missile">Missile</option>
+            <option value="Projectile">Projectile</option>
+            <option value="Electric">Electric</option>
+            <option value="Special">Special</option>
+            <option value="Support">Support</option>
+          </select>
+        </div>
+        <div>
+          <label for="yellowModifier">Modifier</label>
+          <input type="number" id="yellowModifier" placeholder="200" />
+        </div>
       </div>
     </div>
 
@@ -276,6 +368,35 @@
       generateCard();
     }
 
+    function drawAttackText(ctx, value, attackName, category, modifier, y) {
+      ctx.save();
+      ctx.textBaseline = "middle";
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2;
+      ctx.fillStyle = "#111";
+
+      ctx.font = "bold 12px Arial";
+      ctx.textAlign = "center";
+      ctx.strokeText(value, 55, y);
+      ctx.fillText(value, 55, y);
+
+      ctx.font = "bold 11px Arial";
+      ctx.textAlign = "left";
+      ctx.strokeText(attackName, 78, y);
+      ctx.fillText(attackName, 78, y);
+
+      ctx.font = "bold 10px Arial";
+      ctx.strokeText(category, 210, y);
+      ctx.fillText(category, 210, y);
+
+      ctx.font = "bold 12px Arial";
+      ctx.textAlign = "right";
+      const modifierText = modifier === "" ? "" : `+${modifier}`;
+      ctx.strokeText(modifierText, 325, y);
+      ctx.fillText(modifierText, 325, y);
+      ctx.restore();
+    }
+
     async function generateCard() {
       const currentRender = ++renderVersion;
       const canvas = document.getElementById("cardCanvas");
@@ -287,6 +408,21 @@
       const desc = document.getElementById("description").value;
       const atk = document.getElementById("atk").value;
       const def = document.getElementById("def").value;
+
+      const redValue = document.getElementById("red").value;
+      const redAttackName = document.getElementById("redAttackName").value;
+      const redCategory = document.getElementById("redCategory").value;
+      const redModifier = document.getElementById("redModifier").value;
+
+      const blueValue = document.getElementById("blue").value;
+      const blueAttackName = document.getElementById("blueAttackName").value;
+      const blueCategory = document.getElementById("blueCategory").value;
+      const blueModifier = document.getElementById("blueModifier").value;
+
+      const yellowValue = document.getElementById("yellow").value;
+      const yellowAttackName = document.getElementById("yellowAttackName").value;
+      const yellowCategory = document.getElementById("yellowCategory").value;
+      const yellowModifier = document.getElementById("yellowModifier").value;
 
       try {
         const frameImg = await loadFrame(type);
@@ -302,6 +438,11 @@
         if (uploadedImage) {
           ctx.drawImage(uploadedImage, imgX, imgY, imgWidth, imgHeight);
         }
+
+        // Attack text is drawn after the uploaded artwork.
+        drawAttackText(ctx, redValue, redAttackName, redCategory, redModifier, 352);
+        drawAttackText(ctx, blueValue, blueAttackName, blueCategory, blueModifier, 388);
+        drawAttackText(ctx, yellowValue, yellowAttackName, yellowCategory, yellowModifier, 424);
 
         ctx.font = "15px Bigmacca";
         ctx.fillStyle = "#000";
