@@ -310,7 +310,9 @@
       Organoid: "frames/frame-organoid.png"
     };
 
+    const attackLayoutSource = "frames/AttackLayout.png";
     const frameCache = {};
+    let attackLayoutPromise = null;
 
     function loadFrame(type) {
       if (frameCache[type]) return frameCache[type];
@@ -325,9 +327,23 @@
       return frameCache[type];
     }
 
+    function loadAttackLayout() {
+      if (attackLayoutPromise) return attackLayoutPromise;
+
+      attackLayoutPromise = new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => reject(new Error(`Unable to load attack layout: ${attackLayoutSource}`));
+        image.src = attackLayoutSource;
+      });
+
+      return attackLayoutPromise;
+    }
+
     Object.keys(frameSources).forEach(type => {
       loadFrame(type).catch(error => console.error(error));
     });
+    loadAttackLayout().catch(error => console.error(error));
 
     document.querySelectorAll('input, textarea').forEach(el => {
       el.addEventListener('input', generateCard);
@@ -425,7 +441,10 @@
       const yellowModifier = document.getElementById("yellowModifier").value;
 
       try {
-        const frameImg = await loadFrame(type);
+        const [frameImg, attackLayoutImg] = await Promise.all([
+          loadFrame(type),
+          loadAttackLayout()
+        ]);
 
         if (currentRender !== renderVersion) return;
 
@@ -434,12 +453,15 @@
         // Selected card frame is the back layer.
         ctx.drawImage(frameImg, 0, 0, canvas.width, canvas.height);
 
-        // Uploaded Zoid/card artwork is drawn above the frame.
+        // Uploaded Zoid/card artwork is drawn above the card frame.
         if (uploadedImage) {
           ctx.drawImage(uploadedImage, imgX, imgY, imgWidth, imgHeight);
         }
 
-        // Attack text is drawn after the uploaded artwork.
+        // Attack layout is drawn in front of the uploaded artwork and fitted to the full card.
+        ctx.drawImage(attackLayoutImg, 0, 0, canvas.width, canvas.height);
+
+        // Attack text is drawn above the attack layout.
         drawAttackText(ctx, redValue, redAttackName, redCategory, redModifier, 352);
         drawAttackText(ctx, blueValue, blueAttackName, blueCategory, blueModifier, 388);
         drawAttackText(ctx, yellowValue, yellowAttackName, yellowCategory, yellowModifier, 424);
@@ -490,7 +512,7 @@
         ctx.fillStyle = "#111";
         ctx.font = "14px Arial";
         ctx.textAlign = "center";
-        ctx.fillText("Frame failed to load.", canvas.width / 2, canvas.height / 2);
+        ctx.fillText("Card assets failed to load.", canvas.width / 2, canvas.height / 2);
         console.error(error);
       }
     }
