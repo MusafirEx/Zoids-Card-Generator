@@ -393,13 +393,13 @@
 
       ctx.font = "bold 12px Arial";
       ctx.textAlign = "center";
-      ctx.strokeText(value, 55, y);
-      ctx.fillText(value, 55, y);
+      ctx.strokeText(value, 55, y+1);
+      ctx.fillText(value, 55, y+1);
 
       ctx.font = "bold 11px Arial";
       ctx.textAlign = "left";
-      ctx.strokeText(attackName, 78, y);
-      ctx.fillText(attackName, 78, y);
+      ctx.strokeText(attackName, 78, y+3);
+      ctx.fillText(attackName, 78, y+3);
 
       ctx.font = "bold 10px Arial";
       ctx.strokeText(category, 210, y);
@@ -407,8 +407,8 @@
 
       ctx.font = "bold 12px Arial";
       const modifierText = modifier === "" ? "" : `+${modifier}`;
-      ctx.strokeText(modifierText, 250, y);
-      ctx.fillText(modifierText, 250, y);
+      ctx.strokeText(modifierText, 270, y);
+      ctx.fillText(modifierText, 270, y);
       ctx.restore();
     }
 
@@ -461,7 +461,7 @@
         ctx.drawImage(attackLayoutImg, 0, 0, canvas.width, canvas.height);
 
         // Attack text is drawn above the attack layout.
-        drawAttackText(ctx, redValue, redAttackName, redCategory, redModifier, 353);
+        drawAttackText(ctx, redValue, redAttackName, redCategory, redModifier, 354);
         drawAttackText(ctx, blueValue, blueAttackName, blueCategory, blueModifier, 388);
         drawAttackText(ctx, yellowValue, yellowAttackName, yellowCategory, yellowModifier, 420);
 
